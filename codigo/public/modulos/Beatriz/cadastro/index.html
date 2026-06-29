@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <style type="text/tailwindcss">
+      @theme {
+        --color-base: #F0FFFD;
+        --color-surface: #FFFFFF;
+        --color-primary: #364E72;
+        --color-neutral: #7AB1C9;
+        --color-action: #74C2C9;
+        --color-success: #0AD196;
+        --color-success-light: #40D8C1;
+        --color-warning: #FFDA55;
+        --color-critical: #FF422D;
+      }
+    </style>
+    <script src="/assets/js/login.js" data-require="worker"></script>
+  </head>
+  <body class="bg-base min-h-screen flex items-center justify-center p-4 antialiased font-sans">
+
+    <div class="bg-surface rounded-2xl shadow-xl p-6 max-w-4xl w-full flex flex-col md:flex-row gap-8 border border-neutral/20">
+
+      <div id="container" class="flex-1 flex flex-col gap-4">
+        <h2 class="text-2xl font-bold text-primary mb-2">Cadastro de Produto</h2>
+
+        <input type="text" id="lote" placeholder="LOTE DO PRODUTO:" class="w-full px-4 py-3 border border-neutral rounded-lg text-primary placeholder-neutral focus:outline-none focus:ring-2 focus:ring-action focus:border-action" />
+
+        <select id="marca" class="w-full px-4 py-3 border border-neutral rounded-lg text-primary focus:outline-none focus:ring-2 focus:ring-action focus:border-action">
+          <option value="">SELECIONE A MARCA</option>
+        </select>
+        <input type="text" id="marcaNova" placeholder="NOME DA NOVA MARCA:" class="w-full px-4 py-3 border border-neutral rounded-lg text-primary placeholder-neutral focus:outline-none focus:ring-2 focus:ring-action focus:border-action hidden" />
+
+        <input type="text" id="produto" placeholder="PRODUTO:" class="w-full px-4 py-3 border border-neutral rounded-lg text-primary placeholder-neutral focus:outline-none focus:ring-2 focus:ring-action focus:border-action" />
+
+        <input type="date" id="validade" placeholder="VALIDADE:" class="w-full px-4 py-3 border border-neutral rounded-lg text-primary focus:outline-none focus:ring-2 focus:ring-action focus:border-action" />
+
+        <input type="text" id="quantidade" placeholder="QUANTIDADE:" class="w-full px-4 py-3 border border-neutral rounded-lg text-primary placeholder-neutral focus:outline-none focus:ring-2 focus:ring-action focus:border-action" />
+
+        <select id="fornecedor" class="w-full px-4 py-3 border border-neutral rounded-lg text-primary focus:outline-none focus:ring-2 focus:ring-action focus:border-action">
+          <option value="">SELECIONE O FORNECEDOR</option>
+        </select>
+        <input type="text" id="fornecedorNovo" placeholder="NOME DO NOVO FORNECEDOR:" class="w-full px-4 py-3 border border-neutral rounded-lg text-primary placeholder-neutral focus:outline-none focus:ring-2 focus:ring-action focus:border-action hidden" />
+
+        <select id="categoria" class="w-full px-4 py-3 border border-neutral rounded-lg text-primary focus:outline-none focus:ring-2 focus:ring-action focus:border-action">
+          <option value="">SELECIONE A CATEGORIA</option>
+        </select>
+        <input type="text" id="categoriaNova" placeholder="NOME DA NOVA CATEGORIA:" class="w-full px-4 py-3 border border-neutral rounded-lg text-primary placeholder-neutral focus:outline-none focus:ring-2 focus:ring-action focus:border-action hidden" />
+
+        <select id="carrier" class="w-full px-4 py-3 border border-neutral rounded-lg text-primary focus:outline-none focus:ring-2 focus:ring-action focus:border-action">
+          <option value="">SELECIONE A TRANSPORTADORA</option>
+        </select>
+        <input type="text" id="carrierNovo" placeholder="NOME DA NOVA TRANSPORTADORA:" class="w-full px-4 py-3 border border-neutral rounded-lg text-primary placeholder-neutral focus:outline-none focus:ring-2 focus:ring-action focus:border-action hidden" />
+
+        <input type="number" id="precoCusto" placeholder="PREÇO DE CUSTO:" class="w-full px-4 py-3 border border-neutral rounded-lg text-primary placeholder-neutral focus:outline-none focus:ring-2 focus:ring-action focus:border-action" />
+
+        <input type="number" id="precoVenda" placeholder="PREÇO DE VENDA:" class="w-full px-4 py-3 border border-neutral rounded-lg text-primary placeholder-neutral focus:outline-none focus:ring-2 focus:ring-action focus:border-action" />
+
+        <button id="finalizar" class="w-full bg-action hover:bg-action/85 text-primary font-semibold py-3 px-4 rounded-lg shadow-md text-center transition-colors">
+          FINALIZAR CADASTRO
+        </button>
+      </div>
+
+      <div id="imagem" class="flex flex-col justify-center items-center rounded-xl p-4">
+        <label for="inputImagem" class="w-full h-64 md:h-full max-h-80 min-h-[256px] bg-base text-neutral border-2 border-dashed border-neutral rounded-lg flex items-center justify-center text-center font-medium p-4 select-none cursor-pointer overflow-hidden hover:border-action transition-colors">
+          <img id="previewImagem" class="hidden w-full h-full object-cover rounded-lg" />
+          <span id="textoImagem">Clique para upar a imagem do produto</span>
+        </label>
+        <input type="file" id="inputImagem" accept="image/*" class="hidden" />
+      </div>
+
+    </div>
+
+    <script src="cadastro.js"></script>
+    <script src="/assets/js/sidebar.js" data-role="funcionario"></script>
+  </body>
+</html>

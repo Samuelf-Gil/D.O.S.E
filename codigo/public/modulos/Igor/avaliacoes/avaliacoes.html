@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/basecoat-css@0.3.11/dist/basecoat.cdn.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/basecoat-css@0.3.11/dist/js/all.min.js" defer></script>
+    <script src="https://unpkg.com/lucide@1.0.0/dist/umd/lucide.js"></script>
+    <title>D.O.S.E. - Avaliações</title>
+    <script src="/assets/js/login.js" data-require="auth"></script>
+</head>
+<body class="min-h-screen font-sans antialiased bg-[#F0FFFD] text-[#364E72] flex flex-col">
+
+    <header class="w-full flex items-center justify-between p-8 bg-[#364E72] text-white shadow-md">
+        <h1 class="text-xl font-semibold tracking-wide">Página de Avaliações</h1>
+        <h1 class="text-2xl font-bold tracking-wider">D.O.S.E</h1>
+    </header>
+
+    <main class="w-full p-6 flex flex-col gap-8 max-w-4xl mx-auto mt-4 mb-36">
+        
+        <section class="bg-[#FFFFFF] p-6 rounded-2xl shadow-sm border border-[#7AB1C9]/30 flex flex-col gap-3">
+            <h2 class="text-lg font-semibold" id="companyTitle"></h2>
+            <article class="relative inline-flex w-fit">
+                <article class="flex text-gray-300">
+                    <i data-lucide="star" class="fill-current shrink-0"></i>
+                    <i data-lucide="star" class="fill-current shrink-0"></i>
+                    <i data-lucide="star" class="fill-current shrink-0"></i>
+                    <i data-lucide="star" class="fill-current shrink-0"></i>
+                    <i data-lucide="star" class="fill-current shrink-0"></i>
+                </article>
+                <article id="starsFilled" class="flex text-amber-300 absolute top-0 left-0 overflow-hidden">
+                    <i data-lucide="star" class="fill-current shrink-0"></i>
+                    <i data-lucide="star" class="fill-current shrink-0"></i>
+                    <i data-lucide="star" class="fill-current shrink-0"></i>
+                    <i data-lucide="star" class="fill-current shrink-0"></i>
+                    <i data-lucide="star" class="fill-current shrink-0"></i>
+                </article>
+            </article>
+        </section>
+
+        <section class="bg-[#FFFFFF] p-6 rounded-2xl shadow-sm border border-[#7AB1C9]/30">
+            <h3 class="text-normal font-semibold border-b border-[#7AB1C9]/20 pb-3 mb-4">Avaliações</h3>
+            <article id="ratingsCardsParent" class="flex flex-col gap-3 mt-2 w-full min-[540px]:w-full"></article>
+            
+            <nav id="ratingsPagination" role="navigation" aria-label="pagination" class="mx-auto flex w-full justify-center mt-6">
+                <ul class="flex flex-row items-center gap-1">
+                    <li><a href="#" class="btn-ghost opacity-50 pointer-events-none text-[#7AB1C9]" aria-disabled="true" data-nav="prev"><i data-lucide="chevron-left" class="w-4 h-4"></i>Anterior</a></li>
+                    <li><a href="#" class="border border-[#74C2C9] bg-[#74C2C9] text-white size-9 flex items-center justify-center rounded-lg text-xs font-semibold" aria-current="page" data-page="1">1</a></li>
+                    <li><a href="#" class="border border-[#7AB1C9] hover:border-[#74C2C9] size-9 flex items-center justify-center rounded-lg text-xs font-semibold text-[#364E72] transition" data-page="2">2</a></li>
+                    <li><a href="#" class="border border-[#7AB1C9] hover:border-[#74C2C9] size-9 flex items-center justify-center rounded-lg text-xs font-semibold text-[#364E72] transition" data-page="3">3</a></li>
+                    <li><div class="size-9 flex items-center justify-center text-[#7AB1C9]"><i data-lucide="ellipsis" class="w-4 h-4"></i></div></li>
+                    <li><a href="#" class="btn-ghost text-[#74C2C9] hover:bg-[#74C2C9]/10 flex items-center gap-1" data-nav="next">Próximo<i data-lucide="chevron-right" class="w-4 h-4"></i></a></li>
+                </ul>
+            </nav>
+        </section>
+
+    </main>
+
+    <section id="ratingFooter" class="border-t border-[#7AB1C9]/40 w-full p-6 fixed bottom-0 left-0 bg-[#FFFFFF] shadow-lg">
+        <form id="ratingForm" class="w-full h-full flex flex-col gap-4 max-w-4xl mx-auto">
+            <article class="flex flex-col min-[340px]:flex-row items-center justify-between gap-4">
+                <h3 class="text-normal font-semibold">Deixe sua avaliação!</h3>
+                <article class="inline-flex w-fit items-center gap-4">
+                    <article class="relative inline-flex w-fit">
+                        <article id="newRatingStars" class="flex text-gray-300">
+                            <button id="star-1" class="w-fit h-fit cursor-pointer text-gray-300 hover:text-amber-300 transition" type="button">
+                                <i data-lucide="star" class="fill-current shrink-0"></i>
+                            </button>
+                            <button id="star-2" class="w-fit h-fit cursor-pointer text-gray-300 hover:text-amber-300 transition" type="button">
+                                <i data-lucide="star" class="fill-current shrink-0"></i>
+                            </button>
+                            <button id="star-3" class="w-fit h-fit cursor-pointer text-gray-300 hover:text-amber-300 transition" type="button">
+                                <i data-lucide="star" class="fill-current shrink-0"></i>
+                            </button>
+                            <button id="star-4" class="w-fit h-fit cursor-pointer text-gray-300 hover:text-amber-300 transition" type="button">
+                                <i data-lucide="star" class="fill-current shrink-0"></i>
+                            </button>
+                            <button id="star-5" class="w-fit h-fit cursor-pointer text-gray-300 hover:text-amber-300 transition" type="button">
+                                <i data-lucide="star" class="fill-current shrink-0"></i>
+                            </button>
+                        </article>
+                        <article id="newRatingStarsFilled" class="flex text-amber-300 absolute top-0 left-0 overflow-hidden pointer-events-none">
+                            <i data-lucide="star" class="fill-current shrink-0"></i>
+                            <i data-lucide="star" class="fill-current shrink-0"></i>
+                            <i data-lucide="star" class="fill-current shrink-0"></i>
+                            <i data-lucide="star" class="fill-current shrink-0"></i>
+                            <i data-lucide="star" class="fill-current shrink-0"></i>
+                        </article>
+                    </article>
+                    <article>
+                        <input step="any" name="rating" id="ratingInput" class="input w-20 border-[#7AB1C9] rounded-xl px-3 py-2 text-sm focus:outline-none focus:border-[#74C2C9]" type="number" max="5" min="0" />
+                    </article>
+                </article>
+            </article>
+            <article class="flex flex-col min-[370px]:flex-row justify-between items-end gap-4">
+                <textarea name="ratingDescription" class="textarea w-full border-[#7AB1C9] rounded-xl p-4 text-sm focus:outline-none focus:border-[#74C2C9] resize-none h-20" placeholder="Digite mais informações"></textarea>
+                <button class="bg-[#74C2C9] hover:bg-[#5aaeb5] text-white font-semibold px-6 py-3 rounded-xl shadow-md transition cursor-pointer w-full min-[370px]:w-fit" type="submit" id="submitRatingBtn">Publicar</button>
+            </article>
+        </form>
+    </section>
+
+    <article id="toaster" class="toaster word-break whitespace-normal"></article>
+    <script type="module" src="avaliacoes.js"></script>
+    <script src="/assets/js/sidebar.js" data-role="cliente"></script>
+</body>
+</html>

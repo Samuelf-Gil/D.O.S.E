@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>D.O.S.E - Sistema de Produtos</title>
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="consulta.css">
+    <script src="/assets/js/login.js" data-require="worker"></script>
+</head>
+<body class="bg-gray-100 flex justify-center items-center min-h-screen m-0 p-5">
+    <div class="app-container">
+        
+        <!-- TELA DE LISTA -->
+        <div id="telaLista" class="tela">
+            <div class="flex justify-between items-start mb-4">
+                <div class="header-box">
+                    <h1 class="header-title">LISTA DE PRODUTOS</h1>
+                </div>
+                <div class="flex gap-2">
+                    <button class="btn-action btn-add" onclick="mostrarFormulario()">
+                        <i class="bi bi-plus-circle"></i> NOVO
+                    </button>
+                </div>
+            </div>
+
+            <div class="search-bar-rounded mb-3">
+                <span class="pl-3 text-gray-500">
+                    <i class="bi bi-search"></i>
+                </span>
+                <input 
+                    type="text" 
+                    id="campoBuscaLista" 
+                    class="flex-1 px-3 py-2 outline-none border-0" 
+                    placeholder="Buscar produto por nome, SKU ou código de barras..."
+                >
+                <button class="pr-3 text-gray-500 hover:text-gray-700" type="button" id="btnLimparLista">
+                    <i class="bi bi-x-circle-fill"></i>
+                </button>
+            </div>
+
+            <div id="mensagemLista" class="alert-message hidden"></div>
+            
+            <div class="table-container">
+                <table class="w-full text-sm border-collapse">
+                    <thead>
+                        <tr class="bg-gray-200 text-left text-black">
+                            <th class="p-2 border border-gray-300 font-semibold">ID</th>
+                            <th class="p-2 border border-gray-300 font-semibold">Produto</th>
+                            <th class="p-2 border border-gray-300 font-semibold">Qtd</th>
+                            <th class="p-2 border border-gray-300 font-semibold">Preço</th>
+                            <th class="p-2 border border-gray-300 font-semibold">Localização</th>
+                            <th class="p-2 border border-gray-300 text-center font-semibold">Ações</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tabelaProdutos">
+                        <tr>
+                            <td colspan="6" class="text-center p-4 text-gray-500">
+                                Carregando...
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div id="contadorResultados" class="text-sm text-gray-600 mb-2 text-center hidden">
+                <i class="bi bi-info-circle"></i> <span id="textoContador"></span>
+            </div>
+
+            <div class="logo-dose-bottom">D.O.S.E</div>
+        </div>
+
+        <!-- TELA DE CONSULTA (DETALHES) -->
+        <div id="telaConsulta" class="tela hidden">
+            <div class="flex justify-between items-start mb-4">
+                <div class="header-box">
+                    <h1 class="header-title">CONSULTA INTERNA</h1>
+                </div>
+                <button class="btn-voltar-small" onclick="mostrarTela('telaLista')">VOLTAR</button>
+            </div>
+
+            <div class="flex gap-4 flex-1">
+                <div class="flex-[6]">
+                    <div class="mb-3">
+                        <label class="font-bold text-sm text-gray-700">PRODUTO:</label>
+                        <div id="outProduto" class="text-base font-medium text-gray-900">-</div>
+                    </div>
+                    <div class="mb-3">
+                        <label class="font-bold text-sm text-gray-700">DESCRIÇÃO:</label>
+                        <div id="outDescricao" class="text-sm text-gray-700">-</div>
+                    </div>
+                    <div class="mb-3">
+                        <label class="font-bold text-sm text-gray-700">QTD TOTAL:</label>
+                        <div id="outQtd" class="text-base font-medium text-gray-900">-</div>
+                    </div>
+                    <div class="mb-3">
+                        <label class="font-bold text-sm text-gray-700">PREÇO:</label>
+                        <div id="outPreco" class="text-base font-medium text-green-700">-</div>
+                    </div>
+                    <div class="mb-3">
+                        <label class="font-bold text-sm text-gray-700">CUSTO:</label>
+                        <div id="outCusto" class="text-sm text-gray-700">-</div>
+                    </div>
+                    <div class="mb-3">
+                        <label class="font-bold text-sm text-gray-700">LOCALIZAÇÃO:</label>
+                        <div id="outLocal" class="text-base font-medium text-gray-900">-</div>
+                    </div>
+                    <div class="grid grid-cols-2 gap-2">
+                        <div>
+                            <label class="font-bold text-sm text-gray-700">SKU:</label>
+                            <div id="outSku" class="text-sm text-gray-700">-</div>
+                        </div>
+                        <div>
+                            <label class="font-bold text-sm text-gray-700">UPC:</label>
+                            <div id="outUpc" class="text-sm text-gray-700">-</div>
+                        </div>
+                    </div>
+                    <div class="grid grid-cols-2 gap-2 mt-2">
+                        <div>
+                            <label class="font-bold text-sm text-gray-700">MARCA:</label>
+                            <div id="outMarca" class="text-sm text-gray-700">-</div>
+                        </div>
+                        <div>
+                            <label class="font-bold text-sm text-gray-700">CATEGORIA:</label>
+                            <div id="outCategoria" class="text-sm text-gray-700">-</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="flex-[4]">
+                    <label class="font-bold text-sm text-gray-700 block">IMAGEM DO PRODUTO:</label>
+                    <div class="img-container-framed mt-1 flex items-center justify-center">
+                        <img id="outImagem" src="" alt="Imagem do produto" class="max-h-full hidden">
+                        <span id="semImagem" class="text-gray-400 text-sm">Sem imagem</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="logo-dose-bottom">D.O.S.E</div>
+        </div>
+
+        <!-- TELA DE FORMULÁRIO -->
+        <div id="telaFormulario" class="tela hidden">
+            <div class="flex justify-between items-start mb-4">
+                <div class="header-box">
+                    <h1 class="header-title" id="tituloForm">NOVO PRODUTO</h1>
+                </div>
+                <button class="btn-voltar-small" onclick="mostrarTela('telaLista')">VOLTAR</button>
+            </div>
+            <div id="mensagemForm" class="alert-message hidden mb-3"></div>
+            <form id="formProduto" class="flex flex-col gap-3">
+                <div class="relative">
+                    <div class="rotulo-caixa">NOME:</div>
+                    <input type="text" id="inputNome" class="campo-sistema" required>
+                </div>
+                <div class="relative">
+                    <div class="rotulo-caixa">DESCRIÇÃO:</div>
+                    <input type="text" id="inputDescricao" class="campo-sistema">
+                </div>
+                <div class="relative">
+                    <div class="rotulo-caixa">CUSTO (R$):</div>
+                    <input type="number" id="inputCusto" class="campo-sistema" step="0.01" min="0" required>
+                </div>
+                <div class="relative">
+                    <div class="rotulo-caixa">PREÇO (R$):</div>
+                    <input type="number" id="inputPreco" class="campo-sistema" step="0.01" min="0" required>
+                </div>
+                <div class="relative">
+                    <div class="rotulo-caixa">SKU:</div>
+                    <input type="text" id="inputSku" class="campo-sistema">
+                </div>
+                <div class="relative">
+                    <div class="rotulo-caixa">UPC:</div>
+                    <input type="text" id="inputUpc" class="campo-sistema">
+                </div>
+                <div class="relative">
+                    <div class="rotulo-caixa">LOCALIZAÇÃO:</div>
+                    <input type="text" id="inputLocal" class="campo-sistema">
+                </div>
+                <div class="relative">
+                    <div class="rotulo-caixa">URL DA IMAGEM:</div>
+                    <input type="url" id="inputImagem" class="campo-sistema" placeholder="https://exemplo.com/imagem.jpg">
+                </div>
+                <div class="relative">
+                    <div class="rotulo-caixa">CATEGORIA (ID):</div>
+                    <input type="number" id="inputCategoriaId" class="campo-sistema" min="1">
+                </div>
+                <div class="relative">
+                    <div class="rotulo-caixa">MARCA (ID):</div>
+                    <input type="number" id="inputMarcaId" class="campo-sistema" min="1">
+                </div>
+                <div class="flex gap-2 mt-4">
+                    <button type="submit" class="btn-codigo-barras-dark flex-1">
+                        <i class="bi bi-check-circle"></i> SALVAR
+                    </button>
+                    <button type="button" class="btn-cancelar flex-1" onclick="mostrarTela('telaLista')">
+                        <i class="bi bi-x-circle"></i> CANCELAR
+                    </button>
+                </div>
+            </form>
+            <div class="logo-dose-bottom">D.O.S.E</div>
+        </div>
+    </div>
+    <script src="consulta.js"></script>
+    <script src="/assets/js/sidebar.js" data-role="funcionario"></script>
+</body>
+</html>

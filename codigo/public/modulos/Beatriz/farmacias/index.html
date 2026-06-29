@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>D.O.S.E</title>
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>#map { height: 380px; }</style>
+</head>
+<body class="bg-[#F0FFFD] text-[#364E72] text-sm font-sans">
+
+<header class="bg-[#364E72] text-white px-6 py-4">
+  <h1 class="text-[22px] font-bold">D.O.S.E</h1>
+  <p class="text-[13px] mt-1 opacity-80">Encontre a farmácia mais próxima de você e veja os produtos disponíveis</p>
+</header>
+
+<main class="max-w-[1100px] mx-auto p-5 flex flex-col gap-6">
+
+  <section class="bg-white border border-[#7AB1C9] rounded p-4">
+    <h2 class="text-base font-semibold mb-1.5 border-b-2 border-[#74C2C9] pb-1.5 text-[#364E72]">Meus Endereços</h2>
+    <p class="text-[13px] text-[#364E72]/70 mb-2.5">Cadastre seu endereço para ver a distância até a farmácia no mapa.</p>
+    <button onclick="abrirModalEndereco()" class="px-3.5 py-1.5 bg-[#74C2C9] text-white rounded cursor-pointer text-[13px] hover:bg-[#5BADB4]">
+      + Adicionar Endereço
+    </button>
+    <div id="lista-enderecos" class="mt-3 flex flex-col gap-2"></div>
+  </section>
+
+  <section class="bg-white border border-[#7AB1C9] rounded p-4">
+    <h2 class="text-base font-semibold mb-1.5 border-b-2 border-[#74C2C9] pb-1.5 text-[#364E72]">🗺️ Mapa</h2>
+    <div id="map" class="border border-[#7AB1C9] rounded mb-2.5"></div>
+    <div id="info-distancia" class="text-[13px] text-[#364E72]"></div>
+  </section>
+
+  <section class="bg-white border border-[#7AB1C9] rounded p-4">
+    <h2 class="text-base font-semibold mb-1.5 border-b-2 border-[#74C2C9] pb-1.5 text-[#364E72]">Buscar Produto na Farmácia</h2>
+    <div class="flex gap-2 flex-wrap mb-2.5">
+      <select id="select-categoria" onchange="aoMudarCategoria()" class="flex-1 min-w-[180px] px-2 py-1.5 border border-[#7AB1C9] rounded text-[13px] text-[#364E72] bg-white">
+        <option value="">Todas as categorias</option>
+      </select>
+      <select id="select-produto" onchange="buscarProduto()" class="flex-1 min-w-[180px] px-2 py-1.5 border border-[#7AB1C9] rounded text-[13px] text-[#364E72] bg-white">
+        <option value="">- Selecione um produto -</option>
+      </select>
+    </div>
+    <div class="flex gap-2 mb-2.5">
+      <input type="text" id="input-pesquisa" placeholder="Digite o nome do produto... (ex: Paracetamol)"
+        oninput="filtrarProdutosPorTexto()"
+        class="flex-1 px-2.5 py-1.5 border border-[#7AB1C9] rounded text-[13px] text-[#364E72] bg-white focus:outline-none focus:border-[#74C2C9]">
+      <button onclick="buscarProduto()" class="px-3.5 py-1.5 bg-[#74C2C9] text-white rounded cursor-pointer text-[13px] hover:bg-[#5BADB4]">
+        🔍 Buscar
+      </button>
+    </div>
+    <div id="resultado-busca"></div>
+  </section>
+
+</main>
+
+<div id="modal-endereco" class="fixed inset-0 bg-black/50 flex items-center justify-center z-[1000]" style="display:none">
+  <div class="bg-white rounded p-5 w-full max-w-[420px] border border-[#7AB1C9]">
+    <h3 id="modal-end-titulo" class="mb-3.5 text-base font-semibold text-[#364E72]">Novo Endereço</h3>
+    <form onsubmit="salvarEndereco(event)">
+      <input type="hidden" id="end-id">
+      <label class="block mb-2.5 text-[13px] font-medium text-[#364E72]">Apelido (ex: Casa, Trabalho):
+        <input type="text" id="end-nome" placeholder="Casa" required class="block w-full mt-0.5 px-2 py-1.5 border border-[#7AB1C9] rounded text-[13px] focus:outline-none focus:border-[#74C2C9]">
+      </label>
+      <label class="block mb-2.5 text-[13px] font-medium text-[#364E72]">Rua:
+        <input type="text" id="end-rua" required class="block w-full mt-0.5 px-2 py-1.5 border border-[#7AB1C9] rounded text-[13px] focus:outline-none focus:border-[#74C2C9]">
+      </label>
+      <label class="block mb-2.5 text-[13px] font-medium text-[#364E72]">Número:
+        <input type="text" id="end-numero" required class="block w-full mt-0.5 px-2 py-1.5 border border-[#7AB1C9] rounded text-[13px] focus:outline-none focus:border-[#74C2C9]">
+      </label>
+      <label class="block mb-2.5 text-[13px] font-medium text-[#364E72]">Bairro:
+        <input type="text" id="end-bairro" required class="block w-full mt-0.5 px-2 py-1.5 border border-[#7AB1C9] rounded text-[13px] focus:outline-none focus:border-[#74C2C9]">
+      </label>
+      <label class="block mb-2.5 text-[13px] font-medium text-[#364E72]">Cidade:
+        <input type="text" id="end-cidade" required class="block w-full mt-0.5 px-2 py-1.5 border border-[#7AB1C9] rounded text-[13px] focus:outline-none focus:border-[#74C2C9]">
+      </label>
+      <label class="block mb-2.5 text-[13px] font-medium text-[#364E72]">Estado:
+        <input type="text" id="end-estado" value="MG" required class="block w-full mt-0.5 px-2 py-1.5 border border-[#7AB1C9] rounded text-[13px] focus:outline-none focus:border-[#74C2C9]">
+      </label>
+      <div class="flex gap-2 mt-3.5 justify-end">
+        <button type="submit" class="px-3.5 py-1.5 bg-[#74C2C9] text-white rounded cursor-pointer text-[13px] hover:bg-[#5BADB4]">Salvar</button>
+        <button type="button" onclick="fecharModalEndereco()" class="px-3.5 py-1.5 bg-[#7AB1C9] text-white rounded cursor-pointer text-[13px] hover:bg-[#5F9BB5]">Cancelar</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script src="farmacias.js"></script>
+    <script src="/assets/js/sidebar.js" data-role="cliente"></script>
+</body>
+</html>

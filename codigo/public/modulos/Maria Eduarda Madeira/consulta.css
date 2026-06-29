@@ -1,0 +1,275 @@
+/*CONTAINER PRINCIPAL*/
+.app-container {
+    background-color: #ffffff;
+    width: 800px;
+    min-height: 667px;
+    border: 2px solid #002e6e;
+    border-radius: 20px;
+    padding: 20px;
+    box-shadow: 0px 8px 20px rgba(0,0,0,0.1);
+    position: relative;
+    display: flex;
+    flex-direction: column;
+}
+
+.tela {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    min-height: 627px;
+}
+
+.header-box {
+    border: 1px solid black;
+    padding: 2px 10px;
+}
+
+.header-title {
+    font-size: 1rem;
+    margin: 0;
+    font-weight: normal;
+}
+
+.btn-action {
+    font-size: 0.7rem;
+    border-radius: 4px;
+    padding: 4px 8px;
+    border: none;
+    cursor: pointer;
+    font-weight: bold;
+    transition: all 0.3s;
+}
+
+.btn-search {
+    background-color: #002e6e;
+    color: white;
+}
+
+.btn-search:hover {
+    background-color: #003a85;
+}
+
+.btn-add {
+    background-color: #28a745;
+    color: white;
+}
+
+.btn-add:hover {
+    background-color: #218838;
+}
+
+.btn-voltar-small {
+    font-size: 0.7rem;
+    border-radius: 0;
+    padding: 2px 6px;
+    color: black;
+    border: 1px solid #9ca3af;
+    background-color: transparent;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.btn-voltar-small:hover {
+    background-color: #f3f4f6;
+}
+
+.btn-edit {
+    background-color: #ffc107;
+    color: #000;
+    border: none;
+    padding: 4px 8px;
+    border-radius: 3px;
+    cursor: pointer;
+    font-size: 0.75rem;
+    margin-right: 4px;
+    transition: background-color 0.3s;
+}
+
+.btn-edit:hover {
+    background-color: #e0a800;
+}
+
+.btn-delete {
+    background-color: #dc3545;
+    color: white;
+    border: none;
+    padding: 4px 8px;
+    border-radius: 3px;
+    cursor: pointer;
+    font-size: 0.75rem;
+    transition: background-color 0.3s;
+}
+
+.btn-delete:hover {
+    background-color: #c82333;
+}
+
+.btn-view {
+    background-color: #17a2b8;
+    color: white;
+    border: none;
+    padding: 4px 8px;
+    border-radius: 3px;
+    cursor: pointer;
+    font-size: 0.75rem;
+    margin-right: 4px;
+    transition: background-color 0.3s;
+}
+
+.btn-view:hover {
+    background-color: #138496;
+}
+
+.btn-codigo-barras-dark {
+    background-color: #002e6e;
+    color: white;
+    border-radius: 4px;
+    font-size: 0.9rem;
+    font-weight: bold;
+    border: none;
+    padding: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.btn-codigo-barras-dark:hover {
+    background-color: #003a85;
+}
+
+.btn-cancelar {
+    background-color: #6c757d;
+    color: white;
+    border-radius: 4px;
+    font-size: 0.9rem;
+    font-weight: bold;
+    border: none;
+    padding: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.btn-cancelar:hover {
+    background-color: #5a6268;
+}
+
+.table-container {
+    overflow-x: auto;
+    margin-bottom: 20px;
+    flex: 1;
+}
+
+.search-bar-rounded {
+    border: 1px solid #999;
+    border-radius: 50px;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    background-color: white;
+}
+
+.rotulo-caixa {
+    background-color: #f0f0f0;
+    border: 1px solid #ccc;
+    padding: 1px 4px;
+    font-size: 0.75rem;
+    display: inline-block;
+    margin-bottom: -6px;
+    position: relative;
+    z-index: 2;
+    margin-left: 5px;
+}
+
+.campo-sistema {
+    background-color: #fff !important;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 0.9rem;
+    padding: 4px 8px;
+    width: 100%;
+}
+
+.img-container-framed {
+    border: 1px solid #002e6e;
+    height: 160px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #fafafa;
+}
+
+.alert-message {
+    padding: 10px;
+    border-radius: 4px;
+    font-size: 0.85rem;
+    text-align: center;
+}
+
+.alert-success {
+    background-color: #d4edda;
+    color: #155724;
+    border: 1px solid #c3e6cb;
+}
+
+.alert-error {
+    background-color: #f8d7da;
+    color: #721c24;
+    border: 1px solid #f5c6cb;
+}
+
+.logo-dose-bottom {
+    color: #336B87;
+    font-weight: 900;
+    letter-spacing: 3px;
+    font-size: 2rem;
+    text-align: center;
+    margin-top: auto;
+    padding-top: 20px;
+    padding-bottom: 20px;
+}
+
+/* BADGES DE ESTOQUE */
+.badge-estoque {
+    display: inline-block;
+    padding: 3px 8px;
+    border-radius: 4px;
+    font-size: 0.75rem;
+    font-weight: bold;
+    text-align: center;
+}
+
+.badge-esgotado {
+    background-color: #dc3545;
+    color: white;
+}
+
+.badge-baixo {
+    background-color: #ffc107;
+    color: #000;
+}
+
+.badge-medio {
+    background-color: #17a2b8;
+    color: white;
+}
+
+.badge-alto {
+    background-color: #28a745;
+    color: white;
+}
+
+/* HIDDEN CLASS */
+.hidden {
+    display: none !important;
+}
+
+/* RESPONSIVIDADE */
+@media (max-width: 850px) {
+    .app-container {
+        width: 95%;
+        max-width: 375px;
+    }
+    
+    .table-container {
+        font-size: 0.75rem;
+    }
+}

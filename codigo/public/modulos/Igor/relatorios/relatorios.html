@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>D.O.S.E. - Relatórios</title>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/basecoat-css@0.3.11/dist/basecoat.cdn.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/basecoat-css@0.3.11/dist/js/all.min.js" defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="stylesheet" href="./style.css">
+    <script src="/assets/js/login.js" data-require="worker"></script>
+</head>
+<body class="min-h-screen font-sans antialiased bg-[#F0FFFD] text-[#364E72]">
+
+    <header class="w-full flex items-center justify-between p-10 bg-[#364E72] text-white shadow-md">
+        <h1 class="text-xl font-semibold tracking-wide">Página de Relatórios</h1>
+        <h1 class="text-2xl font-bold tracking-wider">D.O.S.E</h1>
+    </header>
+
+    <main class="w-full p-6 flex flex-col gap-8 max-w-6xl mx-auto mt-6">
+        
+        <section class="bg-[#FFFFFF] p-6 rounded-2xl shadow-sm border border-[#7AB1C9]/40">
+            <form class="w-full flex items-center justify-center">
+                <article class="w-full md:w-[70%] flex flex-col sm:flex-row items-center justify-between gap-6">
+                    <label for="date_start" class="flex flex-col w-full gap-2 font-medium">
+                        Início
+                        <input
+                            id="date_start"
+                            type="date"
+                            min="1900-01-01"
+                            max="2099-12-31"
+                            class="input p-4 rounded-xl border border-[#7AB1C9] focus:border-[#74C2C9] focus:ring-2 focus:ring-[#74C2C9]/30 outline-none transition bg-transparent"
+                        >
+                    </label>
+                    <label for="date_end" class="flex flex-col w-full gap-2 font-medium">
+                        Fim
+                        <input
+                            id="date_end"
+                            type="date"
+                            min="1900-01-01"
+                            max="2099-12-31"
+                            class="input p-4 rounded-xl border border-[#7AB1C9] focus:border-[#74C2C9] focus:ring-2 focus:ring-[#74C2C9]/30 outline-none transition bg-transparent"
+                        >
+                    </label>
+                </article>
+            </form>
+        </section>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <section class="bg-[#FFFFFF] p-6 rounded-2xl shadow-sm border border-[#7AB1C9]/40 flex items-center justify-between">
+                <article class="w-full">
+                    <h3 class="text-sm font-semibold uppercase tracking-wider text-[#7AB1C9] mb-2">Valor total vendido no período</h3>
+                    <p id="sales_total" class="text-4xl font-bold text-[#364E72]">R$ 0,00</p>
+                </article>
+                <div class="p-4 rounded-xl bg-[#40D8C1]/20 text-[#0AD196]">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                    </svg>
+                </div>
+            </section>
+
+            <section class="bg-[#FFFFFF] p-6 rounded-2xl shadow-sm border border-[#7AB1C9]/40 flex items-center justify-between">
+                <article class="w-full">
+                    <h3 class="text-sm font-semibold uppercase tracking-wider text-[#7AB1C9] mb-2">Total de produtos descartados</h3>
+                    <p id="discarts_total" class="text-4xl font-bold text-[#FF422D]">0</p>
+                </article>
+                <div class="p-4 rounded-xl bg-[#FF422D]/10 text-[#FF422D]">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+                    </svg>
+                </div>
+            </section>
+        </div>
+
+        <section class="w-full flex flex-col items-center justify-center bg-[#FFFFFF] p-6 rounded-2xl shadow-sm border border-[#7AB1C9]/40">
+            <h3 class="text-lg font-semibold text-[#364E72] mb-4 w-full text-left">Produtos Mais Vendidos</h3>
+            <article class="w-full max-w-3xl relative aspect-video">
+                <canvas id="mostSelledProductsChart"></canvas>
+            </article>
+        </section>
+
+        <section class="w-full flex flex-col lg:flex-row items-center justify-center gap-6">
+            <article class="w-full bg-[#FFFFFF] p-6 rounded-2xl shadow-sm border border-[#7AB1C9]/40 flex flex-col items-center">
+                <h3 class="text-base font-semibold text-[#364E72] mb-4 w-full text-left">Marcas Mais Vendidas</h3>
+                <div class="w-full relative aspect-video">
+                    <canvas id="mostSelledBrandsChart"></canvas>
+                </div>
+            </article>
+            <article class="w-full bg-[#FFFFFF] p-6 rounded-2xl shadow-sm border border-[#7AB1C9]/40 flex flex-col items-center">
+                <h3 class="text-base font-semibold text-[#364E72] mb-4 w-full text-left">Marcas Menos Vendidas</h3>
+                <div class="w-full relative aspect-video">
+                    <canvas id="lessSelledBrandsChart"></canvas>
+                </div>
+            </article>
+        </section>
+
+        <section class="w-full flex items-center justify-end">
+            <button id="excelButton" class="bg-[#74C2C9] hover:bg-[#5aaeb5] text-white font-semibold px-8 py-4 rounded-xl shadow-md transition cursor-pointer flex items-center gap-3 border-none outline-none">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                    <path fill-rule="evenodd" d="M3 17a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm3.293-7.707a1 1 0 011.414 0L9 10.586V3a1 1 0 112 0v7.586l1.293-1.293a1 1 0 111.414 1.414l-3 3a1 1 0 01-1.414 0l-3-3a1 1 0 010-1.414z" clip-rule="evenodd" />
+                </svg>
+                Exportar Excel
+            </button>
+        </section>
+
+    </main>
+
+    <article id="toaster" class="toaster word-break whitespace-normal"></article>
+    <script type="module" src="relatorios.js"></script>
+    <script src="/assets/js/sidebar.js" data-role="funcionario"></script>
+</body>
+</html>

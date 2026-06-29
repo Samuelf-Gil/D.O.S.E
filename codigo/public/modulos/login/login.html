@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>D.O.S.E. - Acesso</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="/assets/js/login.js"></script>
+</head>
+
+<body class="bg-[#F0FFFD] text-[#364E72] font-sans antialiased min-h-screen flex items-center justify-center p-4">
+
+    <div class="w-full max-w-md bg-white rounded-2xl shadow-sm border border-[#7AB1C9]/30 p-7">
+
+        <div class="flex flex-col items-center gap-2 mb-6">
+            <span class="flex items-center justify-center w-12 h-12 rounded-xl bg-[#74C2C9]">
+                <svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M11 2a2 2 0 0 0-2 2v5H4a2 2 0 0 0-2 2v2a2 2 0 0 0 2 2h5v5a2 2 0 0 0 2 2h2a2 2 0 0 0 2-2v-5h5a2 2 0 0 0 2-2v-2a2 2 0 0 0-2-2h-5V4a2 2 0 0 0-2-2z"/>
+                </svg>
+            </span>
+            <h1 class="text-2xl font-black tracking-[0.18em]">D.O.S.E</h1>
+            <p id="formSubtitle" class="text-xs uppercase tracking-wider text-[#7AB1C9]">Acesse sua conta</p>
+        </div>
+
+        <!-- LOGIN -->
+        <form id="loginForm" class="flex flex-col gap-4">
+            <div>
+                <label class="block text-xs font-semibold mb-1">Login</label>
+                <input type="text" id="login-username" class="w-full p-2.5 border border-[#7AB1C9] rounded-xl bg-white focus:outline-none focus:border-[#74C2C9]">
+            </div>
+            <div>
+                <label class="block text-xs font-semibold mb-1">Senha</label>
+                <input type="password" id="login-password" class="w-full p-2.5 border border-[#7AB1C9] rounded-xl bg-white focus:outline-none focus:border-[#74C2C9]">
+            </div>
+            <button type="submit" class="bg-[#74C2C9] hover:bg-[#5aaeb5] text-white font-semibold py-2.5 rounded-xl shadow-md transition">Entrar</button>
+            <p class="text-center text-sm text-[#364E72]/70">Não tem conta?
+                <button type="button" id="toRegister" class="font-semibold text-[#5aaeb5] hover:text-[#364E72]">Cadastre-se</button>
+            </p>
+        </form>
+
+        <!-- CADASTRO -->
+        <form id="registerForm" class="hidden flex-col gap-4">
+            <div class="grid grid-cols-2 gap-2 p-1 bg-[#F0FFFD] rounded-xl border border-[#7AB1C9]/40">
+                <button type="button" data-tipo="cliente" class="tipo-btn py-2 rounded-lg text-sm font-semibold transition">Cliente</button>
+                <button type="button" data-tipo="funcionario" class="tipo-btn py-2 rounded-lg text-sm font-semibold transition">Funcionário</button>
+            </div>
+
+            <div>
+                <label class="block text-xs font-semibold mb-1">Nome completo</label>
+                <input type="text" id="reg-nome" class="w-full p-2.5 border border-[#7AB1C9] rounded-xl bg-white focus:outline-none focus:border-[#74C2C9]">
+            </div>
+            <div class="grid grid-cols-2 gap-3">
+                <div>
+                    <label class="block text-xs font-semibold mb-1">Login</label>
+                    <input type="text" id="reg-login" class="w-full p-2.5 border border-[#7AB1C9] rounded-xl bg-white focus:outline-none focus:border-[#74C2C9]">
+                </div>
+                <div>
+                    <label class="block text-xs font-semibold mb-1">E-mail</label>
+                    <input type="email" id="reg-email" class="w-full p-2.5 border border-[#7AB1C9] rounded-xl bg-white focus:outline-none focus:border-[#74C2C9]">
+                </div>
+            </div>
+            <div class="grid grid-cols-2 gap-3">
+                <div>
+                    <label class="block text-xs font-semibold mb-1">Senha</label>
+                    <input type="password" id="reg-senha" class="w-full p-2.5 border border-[#7AB1C9] rounded-xl bg-white focus:outline-none focus:border-[#74C2C9]">
+                </div>
+                <div>
+                    <label class="block text-xs font-semibold mb-1">Confirmar senha</label>
+                    <input type="password" id="reg-senha2" class="w-full p-2.5 border border-[#7AB1C9] rounded-xl bg-white focus:outline-none focus:border-[#74C2C9]">
+                </div>
+            </div>
+
+            <!-- Campos exclusivos de funcionário -->
+            <div id="workerFields" class="hidden flex-col gap-4 border-t border-[#7AB1C9]/30 pt-4">
+                <div>
+                    <label class="block text-xs font-semibold mb-1">Chave de convite da farmácia</label>
+                    <input type="text" id="reg-invite" placeholder="Ex.: FST-XXXXXXX" class="w-full p-2.5 border border-[#7AB1C9] rounded-xl bg-white focus:outline-none focus:border-[#74C2C9]">
+                </div>
+                <div>
+                    <label class="block text-xs font-semibold mb-1">Cargo</label>
+                    <select id="reg-role" class="w-full p-2.5 border border-[#7AB1C9] rounded-xl bg-white focus:outline-none focus:border-[#74C2C9]">
+                        <option value="Gerente">Gerente</option>
+                        <option value="Farmacêutico">Farmacêutico</option>
+                        <option value="Atendente">Atendente</option>
+                        <option value="Estoquista">Estoquista</option>
+                    </select>
+                </div>
+            </div>
+
+            <button type="submit" class="bg-[#74C2C9] hover:bg-[#5aaeb5] text-white font-semibold py-2.5 rounded-xl shadow-md transition">Criar conta</button>
+            <p class="text-center text-sm text-[#364E72]/70">Já tem conta?
+                <button type="button" id="toLogin" class="font-semibold text-[#5aaeb5] hover:text-[#364E72]">Entrar</button>
+            </p>
+        </form>
+
+        <div class="mt-5 pt-4 border-t border-[#7AB1C9]/30 text-center">
+            <a href="/modulos/Beatriz/farmacias/index.html" class="inline-flex items-center gap-1 text-sm font-semibold text-[#5aaeb5] hover:text-[#364E72] transition">
+                Ver farmácias sem entrar
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg>
+            </a>
+        </div>
+
+    </div>
+
+    <script>
+        const loginForm = document.getElementById("loginForm");
+        const registerForm = document.getElementById("registerForm");
+        const subtitle = document.getElementById("formSubtitle");
+        const workerFields = document.getElementById("workerFields");
+        let tipoConta = "cliente";
+
+        function showLogin() {
+            loginForm.classList.remove("hidden");
+            registerForm.classList.add("hidden");
+            registerForm.classList.remove("flex");
+            subtitle.textContent = "Acesse sua conta";
+        }
+        function showRegister() {
+            loginForm.classList.add("hidden");
+            registerForm.classList.remove("hidden");
+            registerForm.classList.add("flex");
+            subtitle.textContent = "Crie sua conta";
+        }
+        document.getElementById("toRegister").addEventListener("click", showRegister);
+        document.getElementById("toLogin").addEventListener("click", showLogin);
+
+        function selecionarTipo(tipo) {
+            tipoConta = tipo;
+            document.querySelectorAll(".tipo-btn").forEach((b) => {
+                const ativo = b.dataset.tipo === tipo;
+                b.classList.toggle("bg-[#74C2C9]", ativo);
+                b.classList.toggle("text-white", ativo);
+                b.classList.toggle("text-[#364E72]", !ativo);
+            });
+            const ehFuncionario = tipo === "funcionario";
+            workerFields.classList.toggle("hidden", !ehFuncionario);
+            workerFields.classList.toggle("flex", ehFuncionario);
+        }
+        document.querySelectorAll(".tipo-btn").forEach((b) =>
+            b.addEventListener("click", () => selecionarTipo(b.dataset.tipo))
+        );
+        selecionarTipo("cliente");
+
+        // LOGIN
+        loginForm.addEventListener("submit", async (e) => {
+            e.preventDefault();
+            const username = document.getElementById("login-username").value.trim();
+            const password = document.getElementById("login-password").value;
+            if (!username || !password) {
+                alert("Preencha login e senha.");
+                return;
+            }
+            // Garante a base de usuários carregada
+            db_usuarios = await fetch("/usuarios").then((r) => r.json());
+            if (loginUser(username, password)) {
+                redirectAfterLogin();
+            } else {
+                alert("Usuário ou senha incorretos.");
+            }
+        });
+
+        // CADASTRO
+        registerForm.addEventListener("submit", async (e) => {
+            e.preventDefault();
+            const nome = document.getElementById("reg-nome").value.trim();
+            const login = document.getElementById("reg-login").value.trim();
+            const email = document.getElementById("reg-email").value.trim();
+            const senha = document.getElementById("reg-senha").value;
+            const senha2 = document.getElementById("reg-senha2").value;
+            const isWorker = tipoConta === "funcionario";
+
+            if (!nome || !login || !email || !senha) {
+                alert("Preencha todos os campos.");
+                return;
+            }
+            if (senha !== senha2) {
+                alert("As senhas não conferem.");
+                return;
+            }
+
+            const inviteKey = document.getElementById("reg-invite").value.trim();
+            const role = document.getElementById("reg-role").value;
+            if (isWorker && !inviteKey) {
+                alert("Informe a chave de convite da farmácia.");
+                return;
+            }
+
+            const resultado = await registerUser({ nome, login, email, senha, isWorker, role, inviteKey });
+            if (resultado.ok) {
+                alert("Conta criada com sucesso! Faça login para continuar.");
+                document.getElementById("login-username").value = login;
+                showLogin();
+            } else {
+                alert(resultado.error);
+            }
+        });
+    </script>
+</body>
+
+</html>

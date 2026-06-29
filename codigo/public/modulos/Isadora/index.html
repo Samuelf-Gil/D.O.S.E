@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <title>Descarte de produto</title>
+    <script src="/assets/js/login.js" data-require="worker"></script>
+</head>
+
+<body class="bg-[#F0FFFD] font-[Inter] min-h-screen">
+    <header class="bg-[#364E72] px-6 py-4">
+        <div class="flex flex-col">
+            <button id="btnHome"
+                class="text-white text-[22px] font-bold tracking-wide hover:opacity-80 transition text-left cursor-pointer">
+                D.O.S.E
+            </button>
+            <p class="text-[#d9e4f0] text-sm mt-1">
+                Registre o descarte de produtos do estoque.
+            </p>
+        </div>
+    </header>
+
+    <main class="max-w-4xl mx-auto px-4 py-5">
+
+        <section class="bg-white rounded-2xl shadow-xl p-6">
+
+            <div class="mb-4">
+                <h2 class="text-base font-semibold mb-4 border-b-2 border-[#74C2C9] pb-1.5 text-[#364E72]">
+                    Descarte de Produtos
+                </h2>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+
+                <form id="formDescarte" class="flex flex-col gap-3">
+
+                    <div class="flex flex-col gap-2">
+                        <label for="produto" class="text-sm font-semibold text-[#314d72]">
+                            Produto
+                        </label>
+                        <input type="text" id="produto" list="listaProdutos" placeholder="Pesquise o produto"
+                            class="w-full px-4 py-3 border border-[#b7d4df] rounded-md text-sm focus:outline-none focus:ring-2 focus:ring-[#6bb7c9]" />
+                        <datalist id="listaProdutos"></datalist>
+                    </div>
+
+                    <div class="flex flex-col gap-2">
+                        <label for="motivo" class="text-sm font-semibold text-[#314d72]">
+                            Motivo do descarte
+                        </label>
+                        <select id="motivo"
+                            class="w-full px-4 py-3 border border-[#b7d4df] rounded-md text-sm focus:outline-none focus:ring-2 focus:ring-[#6bb7c9]">
+                            <option value="">Selecione</option>
+                            <option value="vencido">Vencido</option>
+                            <option value="danificado">Danificado</option>
+                            <option value="contaminado">Interdição sanitária</option>
+                        </select>
+                    </div>
+
+                    <div class="flex flex-col gap-2">
+                        <label for="lote" class="text-sm font-semibold text-[#314d72]">
+                            Lote do produto
+                        </label>
+                        <input type="text" id="lote" list="listaLotes" placeholder="Pesquise o lote"
+                            class="w-full px-4 py-3 border border-[#b7d4df] rounded-md text-sm focus:outline-none focus:ring-2 focus:ring-[#6bb7c9]" />
+                        <datalist id="listaLotes"></datalist>
+                    </div>
+
+                    <div class="flex flex-col gap-2">
+                        <label for="quantidade" class="text-sm font-semibold text-[#314d72]">
+                            Quantidade de produtos
+                        </label>
+                        <input type="number" id="quantidade" min="1" placeholder="Ex: 15"
+                            class="w-full px-4 py-3 border border-[#b7d4df] rounded-md text-sm focus:outline-none focus:ring-2 focus:ring-[#6bb7c9]" />
+                    </div>
+
+                    <div class="flex flex-col gap-2">
+                        <label for="responsavel" class="text-sm font-semibold text-[#314d72]">
+                            Responsável pelo descarte
+                        </label>
+                        <input type="text" id="responsavel" placeholder="Ex: Pether"
+                            class="w-full px-4 py-3 border border-[#b7d4df] rounded-md text-sm focus:outline-none focus:ring-2 focus:ring-[#6bb7c9]" />
+                    </div>
+
+                    <div class="flex flex-col gap-2">
+                        <label for="destino" class="text-sm font-semibold text-[#314d72]">
+                            Destino do descarte
+                        </label>
+                        <input type="text" id="destino" list="listaFabricantes" placeholder="Ex: Devolução ao fabricante"
+                            class="w-full px-4 py-3 border border-[#b7d4df] rounded-md text-sm focus:outline-none focus:ring-2 focus:ring-[#6bb7c9]" />
+                        <datalist id="listaFabricantes"></datalist>
+                    </div>
+
+                    <div class="flex flex-col sm:flex-row gap-2 mt-4 justify-end">
+                        <button type="button" id="btnVoltar"
+                            class="w-full sm:w-auto px-4 py-1.5 bg-[#7AB1C9] text-white rounded cursor-pointer text-[13px] hover:bg-[#5F9BB5] order-2 sm:order-1">
+                            Cancelar
+                        </button>
+                        <button type="submit" id="btnFinalizar"
+                            class="w-full sm:w-auto px-4 py-1.5 bg-[#74C2C9] text-white rounded cursor-pointer text-[13px] hover:bg-[#5BADB4] order-1 sm:order-2">
+                            Finalizar
+                        </button>
+                    </div>
+
+                </form>
+
+                <div id="containerImagem" class="flex items-center justify-center w-full h-full min-h-[200px]">
+                    <div id="imagemProduto" class="text-sm text-[#364E72]/50 font-medium bg-[#F0FFFD] border border-[#b7d4df] rounded-xl p-8 text-center">
+                        Selecione um produto
+                    </div>
+                </div>
+
+            </div>
+
+        </section>
+
+        <h2 class="text-base font-semibold mt-10 mb-4 border-b-2 border-[#74C2C9] pb-1.5 text-[#364E72]">
+            Descartes realizados
+        </h2>
+        
+        <div class="bg-white rounded-2xl shadow-xl overflow-hidden">
+            <div class="overflow-x-auto w-full">
+            <table class="w-full border-collapse text-sm text-[#364E72] min-w-[600px]">
+            <thead>
+                <tr class="bg-[#364E72] text-white">
+                    <th class="p-3 text-left font-semibold whitespace-nowrap">Produto</th>
+                    <th class="p-3 text-left font-semibold whitespace-nowrap">Lote</th>
+                    <th class="p-3 text-left font-semibold whitespace-nowrap">Quantidade</th>
+                    <th class="p-3 text-left font-semibold whitespace-nowrap text-center">Motivo</th>
+                    <th class="p-3 text-center font-semibold whitespace-nowrap">Ações</th>
+                </tr>
+            </thead>
+            <tbody id="tabelaDescartes" class="divide-y divide-[#F0FFFD]">
+                </tbody>
+            </table>
+            </div>
+        </div>
+
+    </main>
+
+    <script src="script.js"></script>
+    <script src="/assets/js/sidebar.js" data-role="funcionario"></script>
+</body>
+
+</html>

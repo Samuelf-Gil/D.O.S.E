@@ -1,0 +1,38 @@
+cff-version: 1.0.1
+message: Please cite this software using these metadata.
+title: D.O.S.E (Dashboard de Operações e Gestão de Estoque)
+authors:
+
+  - family-names: Carvalho Ferreira
+    given-names: Beatriz
+  - family-names: Costa Carvalho Campos Silva
+    given-names: Igor
+  - family-names: Ferreira Alvarenga 
+    given-names: Isadora
+  - family-names: Madeira Santana
+    given-names: Maria Eduarda
+  - family-names: Ferreira Gil
+    given-names: Samuel
+  - name-suffix: Professor
+    affiliation: PUC Minas
+    family-names: Vieira Carneiro
+    given-names: Rommel
+  - name-suffix: Professor
+    affiliation: PUC Minas
+    family-names: De Faria Barros
+    given-names: Diego Augusto
+  - name-suffix: Professor
+    affiliation: PUC Minas
+    family-names: Henrique Pereira Costa
+    given-names: Roselene
+  - name-suffix: Professor
+    affiliation: PUC Minas
+    family-names: Silva Tavares
+    given-names: Cleiton
+keywords:
+  - Estoque
+  - Farmácia
+repository-code: https://github.com/ICEI-PUC-Minas-PPLES-TI/plf-es-2026-1-ti1-7620100-dose.git
+license: CC-BY-4.0
+version: 1.0.0
+date-released: 2026-06-28

@@ -1,0 +1,5 @@
+#toaster p {
+    white-space: normal;
+    word-break: normal;
+    overflow-wrap: break-word;
+}
